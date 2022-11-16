@@ -43,14 +43,11 @@ public class Empleado {
     
     
      */
-    
     public Double salario_basico;
     public String nombre;
     public int dias_laborados;
     int horas_trabajadas;
-    
-    
-    
+
     double basico;
     double total_devengados;
     double horas_extras;
@@ -59,20 +56,18 @@ public class Empleado {
     double pension;
     double salud;
     double totalPaga;
-    
 
     public void sueldo_basico() {
-        basico = (salario_basico/30)*dias_laborados;
+        basico = (salario_basico / 30) * dias_laborados;
         System.out.println("Basico" + basico);
     }
 
     public void horas_extras() {
 
-        valor_hora = (salario_basico/30)/8;
-        horas_extras = (valor_hora * 0.25) hora
-                
-                ;
+        valor_hora = (salario_basico / 30) / 8;
+        horas_extras = (valor_hora * 0.25);
         
+
         horas_extras += valor_hora;
         System.out.println("HorasExtras " + horas_extras);
 
@@ -87,16 +82,16 @@ public class Empleado {
 
         pension = salario_basico * 0.04;
         System.out.println("PENSION " + pension);
-        
+
         salud = salario_basico * 0.04;
         System.out.println("SALUD " + salud);
-        
-        
+
         total_deducidos = pension + salud;
         System.out.println("TotalDeducidos" + total_deducidos);
 
     }
-    public void total_pagar(){
+
+    public void total_pagar() {
         totalPaga = total_devengados - total_deducidos;
         System.out.println("Total Paga: " + totalPaga);
     }
