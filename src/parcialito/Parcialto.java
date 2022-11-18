@@ -15,11 +15,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Parcialto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
-    Empleado emple = new Empleado();
-
     public Parcialto() {
         initComponents();
     }
@@ -53,6 +48,11 @@ public class Parcialto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtSalario_Basico.setForeground(new java.awt.Color(51, 255, 153));
+        txtSalario_Basico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSalario_BasicoActionPerformed(evt);
+            }
+        });
 
         txt_HorasTrabajados.setForeground(new java.awt.Color(51, 255, 153));
         txt_HorasTrabajados.addActionListener(new java.awt.event.ActionListener() {
@@ -150,12 +150,12 @@ public class Parcialto extends javax.swing.JFrame {
                 .addComponent(btnCalcular)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(214, 214, 214)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(604, 604, 604)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,33 +188,38 @@ public class Parcialto extends javax.swing.JFrame {
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
         try {
-            emple.salario_basico = Double.parseDouble(txtSalario_Basico.getText());
-            emple.horas_trabajadas = Integer.parseInt(txt_HorasTrabajados.getText());
-            emple.dias_laborados = Integer.parseInt(txt_Dias_Trabajados.getText());
+            String name = txt_name.getText();
+            Double Salario = Double.parseDouble(txtSalario_Basico.getText());
+            int diasTrabajados = Integer.parseInt(txt_Dias_Trabajados.getText());
+            int HorasExtrasTrabajadas = Integer.parseInt(txt_HorasTrabajados.getText());
 
-            if (emple.salario_basico >= 0 && emple.horas_trabajadas >= 0 && emple.dias_laborados >= 0) {
-                emple.sueldo_basico();
-                emple.horas_extras();
-                emple.devengados();
-                emple.deducidos();
-                emple.total_pagar();
+            Empleado nuevo = new Empleado(Salario, name, diasTrabajados, HorasExtrasTrabajadas);
 
-                tabla();
+            if (Salario >= 0.0 && HorasExtrasTrabajadas >= 0 && diasTrabajados >= 0) {
+                nuevo.sueldo_basico();
+                nuevo.horas_extras();
+                nuevo.devengados();
+                nuevo.deducidos();
+                nuevo.total_pagar();
+                
+                tabla(nuevo);
+                nuevo.HashMap();
+                nuevo.Salida();
+
             } else {
                 JOptionPane.showMessageDialog(null, "DATOS ERRONEROS");
             }
+        } catch (java.lang.NumberFormatException a) {
+            System.out.println("ERROR: " + a);
 
-        } catch (NumberFormatException a) {
-            JOptionPane.showMessageDialog(null, "ERROR");
         }
 
     }//GEN-LAST:event_btnCalcularActionPerformed
 
-    private void tabla() {
-
+    private void tabla(Empleado nuevo) {
         int ind = 0;
         DefaultTableModel model = (DefaultTableModel) getTable().getModel();
-        model.insertRow(ind, new Object[]{txt_name.getText(), emple.salario_basico, emple.dias_laborados, emple.basico, emple.horas_trabajadas, emple.horas_extras, emple.total_devengados, emple.pension, emple.salud, emple.total_deducidos, emple.totalPaga});
+        model.insertRow(ind, new Object[]{nuevo.nombre, nuevo.salario_basico, nuevo.dias_laborados, nuevo.basico, nuevo.horas_trabajadas, nuevo.horas_extras, nuevo.total_devengados, nuevo.pension, nuevo.salud, nuevo.total_deducidos, nuevo.totalPaga});
         ind += 1;
     }
 
@@ -225,6 +230,10 @@ public class Parcialto extends javax.swing.JFrame {
     private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_nameActionPerformed
+
+    private void txtSalario_BasicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalario_BasicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSalario_BasicoActionPerformed
 
     /**
      * @param args the command line arguments
