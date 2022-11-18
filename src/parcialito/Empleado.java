@@ -5,6 +5,8 @@
  */
 package parcialito;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Salas
@@ -51,7 +53,6 @@ public class Empleado {
     double basico;
     double total_devengados;
     double horas_extras;
-    double valor_hora;
     double total_deducidos;
     double pension;
     double salud;
@@ -64,11 +65,7 @@ public class Empleado {
 
     public void horas_extras() {
 
-        valor_hora = (salario_basico / 30) / 8;
-        horas_extras = (valor_hora * 0.25);
-        
-
-        horas_extras += valor_hora;
+        horas_extras = (((salario_basico / 30) / 8) * 0.25) + ((salario_basico / 30) / 8) * horas_trabajadas;
         System.out.println("HorasExtras " + horas_extras);
 
     }
@@ -94,5 +91,7 @@ public class Empleado {
     public void total_pagar() {
         totalPaga = total_devengados - total_deducidos;
         System.out.println("Total Paga: " + totalPaga);
+        //ja
     }
+
 }
