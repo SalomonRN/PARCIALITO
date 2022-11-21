@@ -10,8 +10,9 @@ package parcialito;
  */
 public class main {
     public static void main(String[] args) {
-        Parcialto p = new Parcialto();
-        p.setVisible(true);
+        Ingreso i = new Ingreso();
+        i.setVisible(true);
+        i.setBounds(600,250,600,500);
     }
     
 }

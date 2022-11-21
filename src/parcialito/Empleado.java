@@ -128,9 +128,7 @@ public class Empleado {
     public void Salida() {
         for (Entry<Integer, Empleado> e : listaEmpleados.entrySet()) {
             System.out.println(e.getKey() + "=" + e.getValue());
-
         }
-
     }
 
     @Override
